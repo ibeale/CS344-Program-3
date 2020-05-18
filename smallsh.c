@@ -58,20 +58,22 @@ int main(){
             else
                 chdir(getenv("HOME"));
         }
+        // Run all other commands with fork() and execvp()
         else{
             pid_t spawnpid = -5;
             int childExitStatus = -5;
             spawnpid = fork();
             switch(spawnpid){
-                case -1:
+                case -1: // If spawnpid is -1 there was some error forking.
                     printf("Hull Breach! \n");
                     fflush(stdin);
                     exit(1);break;
-                case 0:
+                case 0: //If its a child, then we turn it into an execvp() process and execute whatever is in the arguments
                     execvp(args[0], args);
                     fflush(stdin);
+                    exit(0);
                     break;
-                default:
+                default: // The parent will wait for the child process to exit.
                     waitpid(spawnpid, &childExitStatus, 0);
             }
         }
