@@ -15,6 +15,7 @@ void catchSIGINT(int signo){
 
 int main(){
     int i;
+    int j;
     struct sigaction SIGINT_action = {0};
     SIGINT_action.sa_handler = catchSIGINT;
     sigfillset(&SIGINT_action.sa_mask);
@@ -42,7 +43,27 @@ int main(){
         char* delim = " \n";
         char* arg = strtok(buffer, delim);
         int num_args = 0;
+        char* newarg;
         while(arg != NULL){
+            if(strstr(arg, "$$") != NULL){
+                char pid[20];
+                newarg = malloc(STR_BUF);
+                memset(pid,'\0', 20);
+                memset(newarg,'\0', STR_BUF);
+                sprintf(pid, "%d", getpid());
+                int newargpos = 0;
+                for(j = 0; j < strlen(arg);j++){
+                    if(arg[j] == '$'){
+                        strcat(newarg, pid);
+                        newargpos = strlen(newarg);
+                        j+=2;
+                    }
+                    newarg[newargpos] = arg[j];
+                    newargpos++;
+                }
+                arg = strdup(newarg);
+                free(newarg);
+            }
             args[num_args] = arg;
             arg = strtok(NULL, delim);
             num_args++;
