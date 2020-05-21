@@ -1,0 +1,120 @@
+PRE-SCRIPT INFO
+  Grading Script PID: 171500
+  Note: your smallsh will report a different PID when evaluating $$
+: BEGINNING TEST SCRIPT
+: 
+: --------------------
+: ===1=== Using comment (5 points if only next prompt is displayed next)
+:  : Command not found.
+: 
+: 
+: --------------------
+: ===2=== ls (10 points for returning dir contents)
+: 1
+p3testscript
+smallsh
+smallsh.c
+: 
+: 
+: --------------------
+: ls out junk
+: : 
+: 
+: --------------------
+: ===3a=== cat junk (15 points for correctly returning contents of junk)
+: 1
+junk
+p3testscript
+smallsh
+smallsh.c
+: 
+: 
+: --------------------
+: ===3b=== wc in junk (15 points for returning correct numbers from wc)
+:  5  5 38
+: 
+: 
+: --------------------
+: ===3b=== wc in junk out junk2; cat junk2 (10 points for returning correct numbers from wc)
+: :  5  5 38
+: 
+: 
+: --------------------
+: ===4=== test -f badfile (10 points for returning error value of 1, note extraneous &)
+: test: Command not found.
+: exit value 1
+: 
+: 
+: --------------------
+: ===5a=== wc in badfile (10 points for returning text error)
+: cannot open badfile for input
+wc: Command not found.
+: 
+: 
+: --------------------
+: ===5b=== badfile (10 points for returning text error)
+: badfile: Command not found.
+: 
+: 
+: --------------------
+: ===6a=== sleep 100 background (10 points for returning process ID of sleeper)
+: Background process 171742 has started.
+: 
+: 
+: --------------------
+: ===6b,c=== pkill -signal SIGTERM sleep (10 points for pid of killed process, 10 points for signal)
+: (Ignore message about Operation Not Permitted)
+: pkill: killing pid 87048 failed: Operation not permitted
+pkill: killing pid 110137 failed: Operation not permitted
+pkill: killing pid 115022 failed: Operation not permitted
+pkill: killing pid 164971 failed: Operation not permitted
+pkill: killing pid 172103 failed: Operation not permitted
+pkill: killing pid 228436 failed: Operation not permitted
+pkill: killing pid 300971 failed: Operation not permitted
+pkill: killing pid 318660 failed: Operation not permitted
+pkill: killing pid 325089 failed: Operation not permitted
+Process 171742 has completed
+Process was terminated by signal 15.
+: 
+: 
+: --------------------
+: ===6d,e=== sleep 1 background (10 pts for pid of bg ps when done, 10 for exit value)
+: Background process 171983 has started.
+: : 
+Process 171983 has completed
+exit value 0
+: 
+: --------------------
+: pwd
+: /nfs/stak/users/bealei/CS344/Program3
+: 
+: 
+: --------------------
+: cd
+: : 
+: 
+: --------------------
+: ===7a=== pwd (10 points for being in the HOME dir)
+: /nfs/stak/users/bealei
+: 
+: 
+: --------------------
+: mkdir testdir171513
+: : 
+: 
+: --------------------
+: cd testdir171513
+: : 
+: 
+: --------------------
+: ===7b=== pwd (5 points for being in the newly created dir)
+: /nfs/stak/users/bealei/testdir171513
+: --------------------
+: ===8=== Testing foreground-only mode (20 points for entry & exit text AND ~5 seconds between times)
+: 
+Background Processes disabled.
+: Wed May 20 19:26:46 PDT 2020
+: : Wed May 20 19:26:51 PDT 2020
+: 
+Background Processes enabled.
+: 
